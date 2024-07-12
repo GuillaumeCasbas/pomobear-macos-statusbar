@@ -38,11 +38,21 @@ func Start() {
 			}
 		}()
 
+		itemStart := appkit.NewMenuItemWithAction("Start", "start", func(sender objc.Object) {
+			exec.Command("pomobear", "start").Run()
+		})
+
+		itemStop := appkit.NewMenuItemWithAction("Stop", "st", func(sender objc.Object) {
+			exec.Command("pomobear", "stop").Run()
+		})
+
 		itemQuit := appkit.NewMenuItem()
 		itemQuit.SetTitle("Quit")
 		itemQuit.SetAction(objc.Sel("terminate:"))
 
 		menu := appkit.NewMenu()
+		menu.AddItem(itemStart)
+		menu.AddItem(itemStop)
 		menu.AddItem(itemQuit)
 		item.SetMenu(menu)
 	})
